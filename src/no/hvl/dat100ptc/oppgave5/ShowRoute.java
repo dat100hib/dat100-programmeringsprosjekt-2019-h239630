@@ -11,8 +11,8 @@ import no.hvl.dat100ptc.oppgave4.GPSComputer;
 public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
-	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800;
+	private static int MAPXSIZE = 500;
+	private static int MAPYSIZE = 500;
 
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -54,22 +54,32 @@ public class ShowRoute extends EasyGraphics {
 
 	// antall y-pixels per breddegrad
 	public double ystep() {
-	
-		double ystep;
 		
 		// TODO - START
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		
-		throw new UnsupportedOperationException(TODO.method());
-
+		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat));
+		
+		return ystep;
 		// TODO - SLUTT
-		
 	}
 
 	public void showRouteMap(int ybase) {
 
 		// TODO - START
+		// fillCircle(senterX, senterY, radius) og drawLine(x,y,x1,y1) 
 		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < gpspoints.length; i++) {
+			int x = (int) (xstep() / gpspoints[i].getLongitude());
+			int y = (int) (ystep() / gpspoints[i].getLatitude());
+			setColor(0,255,0);
+			fillCircle(x, y, 5);
+			
+			
+		}
+		
+		double minLat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		
 		// TODO - SLUTT
 	}
@@ -82,9 +92,21 @@ public class ShowRoute extends EasyGraphics {
 		setFont("Courier",12);
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+		/*double y = gpspoints[0].getLatitude();
+		double x = gpspoints[0].getLongitude();
+		double y1 = gpspoints[1].getLatitude();
+		double x1 = gpspoints[1].getLongitude();
+		double ys = ystep();
+		double xs = xstep();
+		System.out.println("ystep " + ys);
+		System.out.println("Latitude: " + y);
+		System.out.println("Delt på: " + ys / y);
+		System.out.println("xstep " + xs);
+		System.out.println("Longitude: " + x);
+		System.out.println("Delt på: " + xs / x);
+		System.out.println(ys / y1);
+		System.out.println(xs / x1);
+		*/
 		// TODO - SLUTT;
 	}
 
@@ -92,7 +114,6 @@ public class ShowRoute extends EasyGraphics {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 	}
